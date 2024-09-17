@@ -12,7 +12,7 @@ export default function CariTanitim() {
             if (result.data.geriBildirimDto.kodu != 0) {
                 toast.error(result.data.geriBildirimDto.aciklama)
             } else {
-                //setMusteriler(result.data.cariDtoList)
+                setMusteriler(result.data.cariDtoList)
             }
         })
     }, [])
@@ -57,25 +57,7 @@ export default function CariTanitim() {
                             ))
                         }
 
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                            <td>@fat</td>
-                            <td>@fat</td>
-                            <td>@fat</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td colspan="2">Larry the Bird</td>
-                            <td>@twitter</td>
-                            <td>@twitter</td>
-                            <td>@twitter</td>
-                            <td>@twitter</td>
-                            <td>@twitter</td>
-                        </tr>
+                        
                     </tbody>
                 </table>
             </div>

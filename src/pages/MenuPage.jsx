@@ -4,6 +4,7 @@ import Header from '../layouts/Header'
 import Dashboard from './Dashboard'
 import { Route, Routes } from 'react-router-dom'
 import CariTanitim from '../layouts/CariTanitim'
+import LoginPage from '../pages/LoginPage'
 
 export default function MenuPage() {
     return (
@@ -16,6 +17,7 @@ export default function MenuPage() {
                     <Routes>
                     <Route path="/index" Component={CariTanitim} />
                     <Route path="/cariTanitim" Component={CariTanitim} />
+                    <Route path="/login" Component={LoginPage} />
                     </Routes>
                 </div>
             </div>

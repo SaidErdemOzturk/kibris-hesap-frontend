@@ -1,4 +1,5 @@
 import axios from "axios";
+import { json } from "react-router-dom";
 
 export default class MusteriTedarikciService {
 
@@ -10,7 +11,7 @@ export default class MusteriTedarikciService {
         }
 
         return axios.post("https://apitest.kibrishesap.com/api/MusteriTedarikci/Index", 
-            cariTipi, // Veriyi JSON formatına çevir
+            JSON.stringify({cariTipi}), // Veriyi JSON formatına çevir
             {
                 headers: {
                     'Authorization': `Bearer ${token}`, // Bearer Token başlığı
