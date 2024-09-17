@@ -16,7 +16,7 @@ export default function MenuPage() {
                     <Header />
                     <Routes>
                     <Route path="/index" Component={CariTanitim} />
-                    <Route path="/cariTanitim" Component={CariTanitim} />
+                    <Route path="/cariTanitim/:id" Component={CariTanitim} />
                     <Route path="/login" Component={LoginPage} />
                     </Routes>
                 </div>

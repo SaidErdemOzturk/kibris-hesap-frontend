@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import MusteriTedarikciService from '../services/musteriTedarikciService'
 import { toast } from 'react-toastify'
+import { useParams } from 'react-router-dom'
 
 export default function CariTanitim() {
+
+    let { id } = useParams()
 
     const [musteriler, setMusteriler] = useState([{ unvani: "", yetkiliKisi: "", cepTelefonu1: "", vergiDairesi: "", adres: "", paraBirimi: "", pasif: false }])
 
     useEffect(() => {
         let musteriTedarikciService = new MusteriTedarikciService()
-        musteriTedarikciService.getMusteriler(2).then((result) => {
+        musteriTedarikciService.getMusteriler(id).then((result) => {
             if (result.data.geriBildirimDto.kodu != 0) {
                 toast.error(result.data.geriBildirimDto.aciklama)
             } else {
