@@ -18,7 +18,7 @@ export default function CariTanitim() {
                 setMusteriler(result.data.cariDtoList)
             }
         })
-    }, [])
+    }, [id])
 
 
     return (
@@ -59,12 +59,9 @@ export default function CariTanitim() {
                                 </tr>
                             ))
                         }
-
-                        
                     </tbody>
                 </table>
             </div>
-
         </div>
 
     )

@@ -22,23 +22,36 @@ import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import { Link } from 'react-router-dom';
 
 export default function TreeMap() {
-    return (
-        <div>
-            <div>
-                <img src={myImage} alt="My Example" className='rounded img-fluid bg-primary' />
-            </div>
-            <Sidebar className="app">
+
+
+  return (
+    <div>
+      <div>
+        <img src={myImage} alt="My Example" className='rounded img-fluid bg-primary' />
+      </div>
+      <Sidebar className="app">
         <Menu>
           <MenuItem className="menu1" icon={<MenuRoundedIcon />}>
           </MenuItem>
-          <MenuItem icon={<GridViewRoundedIcon />}>  
-          <Link to="/cariTanitim">
-          Dashboard
-                </Link> </MenuItem>
-          <MenuItem icon={<ReceiptRoundedIcon />}> Invoices </MenuItem>
-          <SubMenu label="Charts" icon={<BarChartRoundedIcon />}>
-            <MenuItem icon={<TimelineRoundedIcon />}> Timeline Chart </MenuItem>
-            <MenuItem icon={<BubbleChartRoundedIcon />}>Bubble Chart</MenuItem>
+          <Link to="/cariTanitim/1">
+            <MenuItem icon={<GridViewRoundedIcon />}>
+
+              Müşteriler
+            </MenuItem></Link>
+          <Link to="/cariTanitim/2">
+            <MenuItem icon={<ReceiptRoundedIcon />}>
+              Tedarikçiler
+            </MenuItem></Link>
+          <SubMenu label="Ürünler" icon={<BarChartRoundedIcon />}>
+            <Link to="/urunler">
+              <MenuItem icon={<TimelineRoundedIcon />}> Ürün & Hizmet Tanıtımı </MenuItem>
+            </Link>
+
+            <Link to="/depoTanitim">
+
+              <MenuItem icon={<BubbleChartRoundedIcon />}>Depo Tanıtımı</MenuItem>
+            </Link>
+
           </SubMenu>
           <SubMenu label="Wallets" icon={<WalletRoundedIcon />}>
             <MenuItem icon={<AccountBalanceRoundedIcon />}>
@@ -57,9 +70,9 @@ export default function TreeMap() {
           <MenuItem icon={<LogoutRoundedIcon />}> Logout </MenuItem>
         </Menu>
       </Sidebar>
-        </div>
+    </div>
 
-    )
+  )
 }
 
 /*
