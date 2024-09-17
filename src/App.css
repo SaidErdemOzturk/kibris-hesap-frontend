@@ -1,0 +1,22 @@
+
+.custom-bg {
+  background-image: url('background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+.custom-tree-bg{
+  background-color: #424f63;
+}
+
+.custom-dashboard-bg{
+  background-color: #eff0f4;
+}
+
+.custom-cari-bg {
+  background-color: #ffffff;
+
+}
+
