@@ -7,6 +7,7 @@ import CariTanitim from '../layouts/CariTanitim'
 import LoginPage from '../pages/LoginPage'
 import Urunler from '../layouts/Urunler'
 import DepoTanitim from '../layouts/DepoTanitim'
+import CariIslemler from '../layouts/CariIslemler'
 
 export default function MenuPage() {
     return (
@@ -22,6 +23,7 @@ export default function MenuPage() {
                     <Route path="/login" Component={LoginPage} />
                     <Route path="/urunler" Component={Urunler} />
                     <Route path="/depoTanitim" Component={DepoTanitim} />
+                    <Route path="/cariIslemler" Component={CariIslemler} />
                     </Routes>
                 </div>
             </div>

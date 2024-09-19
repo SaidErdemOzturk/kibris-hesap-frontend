@@ -53,12 +53,13 @@ export default function TreeMap() {
             </Link>
 
           </SubMenu>
-          <SubMenu label="Wallets" icon={<WalletRoundedIcon />}>
-            <MenuItem icon={<AccountBalanceRoundedIcon />}>
-              Current Wallet
-            </MenuItem>
-            <MenuItem icon={<SavingsRoundedIcon />}>Savings Wallet</MenuItem>
-          </SubMenu>
+
+          <Link to="/cariIslemler">
+
+            <MenuItem icon={<BubbleChartRoundedIcon />}>Cari İşlemler</MenuItem>
+          </Link>
+
+          <MenuItem icon={<SavingsRoundedIcon />}>Savings Wallet</MenuItem>
           <MenuItem icon={<MonetizationOnRoundedIcon />}>Transactions</MenuItem>
           <SubMenu label="Settings" icon={<SettingsApplicationsRoundedIcon />}>
             <MenuItem icon={<AccountCircleRoundedIcon />}> Account </MenuItem>
