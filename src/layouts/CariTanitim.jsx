@@ -11,7 +11,7 @@ export default function CariTanitim() {
 
     useEffect(() => {
         let musteriTedarikciService = new MusteriTedarikciService()
-        musteriTedarikciService.getMusteriler(id).then((result) => {
+        musteriTedarikciService.getMusteriTedarikci(id).then((result) => {
             if (result.data.geriBildirimDto.kodu != 0) {
                 toast.error(result.data.geriBildirimDto.aciklama)
             } else {

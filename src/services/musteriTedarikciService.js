@@ -3,7 +3,7 @@ import { json } from "react-router-dom";
 
 export default class MusteriTedarikciService {
 
-    getMusteriler(cariTipi) {
+    getMusteriTedarikci(cariTipi) {
         const token = localStorage.getItem("token"); // Token'i al
         if (!token) {
             console.error("Token bulunamadı!");
