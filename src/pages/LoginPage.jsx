@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import MenuService from '../services/menuService'
 import { toast } from 'react-toastify'
+import { login } from '../store/actions/userAction';
+import { useDispatch } from 'react-redux'
 
 
 export default function LoginPage() {
@@ -10,18 +12,19 @@ export default function LoginPage() {
     const [user, setUser] = useState(null)
 
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const handleSignIn = () => {
+
         let menuService = new MenuService()
         menuService.login(email, password).then(result => {
             if (result.data.geriBildirimDto.kodu != 0) {
                 toast.error(result.data.geriBildirimDto.aciklama)
             } else {
-                localStorage.setItem("ePosta",`${result.data.ePosta}`)
-                localStorage.setItem("firmaAdi",`${result.data.firmaAdi}`)
-                localStorage.setItem("firmaUnvani",`${result.data.firmaUnvani}`)
-                localStorage.setItem("token",`${result.data.token}`)
-                console.log("gitti")
+                dispatch(login(result.data.ePosta,
+                    result.data.firmaAdi,
+                    result.data.firmaUnvani,
+                    result.data.token))
                 navigate("/index")
             }
         })
@@ -37,8 +40,8 @@ export default function LoginPage() {
                         <h3>Kıbrıs Hesap</h3>
                         <h5>Hoş geldiniz e-posta ve parolanız ile güvenli giriş yapabilirsiniz</h5>
                         <div className="form-floating mb-3">
-                        <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" onChange={(e) => setEmail(e.target.value)} />
-                        <label htmlFor="floatingInput">Eposta adresiniz</label>
+                            <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" onChange={(e) => setEmail(e.target.value)} />
+                            <label htmlFor="floatingInput">Eposta adresiniz</label>
                         </div>
                         <div className="form-floating mb-3">
                             <input type="password" className="form-control" id="floatingPassword" placeholder="name@example.com" onChange={(e) => setPassword(e.target.value)} />
