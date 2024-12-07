@@ -14,7 +14,6 @@ export default function Urunler() {
                 toast.error(result.data.geriBildirimDto.aciklama)
             } else {
                 setUrunler(result.data.urunDtoList)
-                console.log(result)
             }
         })
     }, [])
