@@ -1,27 +1,51 @@
 import React, { useEffect, useState } from 'react'
 import MusteriTedarikciService from '../services/musteriTedarikciService'
+import CariIslemlerService from '../services/cariIslemlerService';
+import NakitKrediKartiBanka from '../modals/cariHareketKaydiModals/NakitKrediKartiBanka';
 
 export default function CariIslemler() {
 
   const [musteriTedarikci, setMusteriTedarikci] = useState([])
+  const [selectedMusteriTedarikci, setSelectedMusteriTedarikci] = useState({ cariFisHareketDtoList: [], hesapGenelToplamDto: {}, cariDto: {} });
+  const [cariFisHareketDtoList, setCariFisHareketDtoList] = useState([{}])
+  const [hesapGenelToplamDto, setHesapGenelToplamDto] = useState({})
+
+
+  const BorcAlacakFisleri = () => <div>Borç Alacak Fişleri Component</div>;
+  const CariVirman = () => <div>Cari Virman Component</div>;
+  const CariTaksitOdeme = () => <div>Cari Taksit Ödeme Component</div>;
+  const FaturaTahsilatOdeme = () => <div>Fatura Tahsilat/Ödeme Component</div>;
+
+  const [activeComponent, setActiveComponent] = useState(null);
 
   useEffect(() => {
-    let musteriTedarikci = new MusteriTedarikciService()
-    musteriTedarikci.getMusteriTedarikci(1).then(result=>{
-      setMusteriTedarikci()
+    let musteriTedarikciService = new MusteriTedarikciService()
+    musteriTedarikciService.getMusteriTedarikci(1).then(musteri => {
+      musteriTedarikciService.getMusteriTedarikci(2).then(tedarikci => {
+        setMusteriTedarikci([...musteri.data.cariDtoList, ...tedarikci.data.cariDtoList])
+      })
     })
   }, [])
-  
+
+  const handleSelectMusteriTedarikci = (event) => {
+    let cariIslemlerService = new CariIslemlerService()
+    cariIslemlerService.getCariIslemler(event.target.value).then(result => {
+      setSelectedMusteriTedarikci(result.data)
+      setHesapGenelToplamDto(result.data.hesapGenelToplamDto)
+      console.log(result.data)
+      setCariFisHareketDtoList(result.data.cariFisHareketDtoList)
+    })
+  };
 
 
   return (
     <div>
       <div className='d-flex justify-content-around mt-2 custom-cariIslemler-label-bg rounded p-3'>
-        <div className='label text-light'> Firma adı</div>
-        <div className='label text-light'> Borç</div>
-        <div className='label text-light'> Alacak</div>
-        <div className='label text-light'> Bakiye</div>
-        <div className='label text-light'> Taksit Borcu</div>
+        <div className='label text-light'> {selectedMusteriTedarikci.cariDto.unvani}</div>
+        <div className='label text-light'> Borç: {hesapGenelToplamDto.borc}</div>
+        <div className='label text-light'> Alacak: {hesapGenelToplamDto.alacak}</div>
+        <div className='label text-light'> Bakiye: {hesapGenelToplamDto.bakiye}</div>
+        <div className='label text-light'> Taksit Borcu: {selectedMusteriTedarikci.taksitBorcToplam}</div>
         <div className='label text-light'> Para birimi gelecek</div>
       </div>
 
@@ -31,11 +55,35 @@ export default function CariIslemler() {
             Cari Hareket Kaydı
           </button>
           <ul className="dropdown-menu">
-            <li><a className="dropdown-item" href="#">Nakit/Kredi Kartı/Banka</a></li>
-            <li><a className="dropdown-item" href="#">Borç Alacak Fişleri</a></li>
-            <li><a className="dropdown-item" href="#">Cari Virman</a></li>
-            <li><a className="dropdown-item" href="#">Cari Taksit Ödeme</a></li>
-            <li><a className="dropdown-item" href="#">Fatura Tahsilat/Ödeme</a></li>
+            <li>
+              <button
+                className="dropdown-item"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
+                Nakit/Kredi Kartı/Banka
+              </button>
+            </li>
+            <li>
+              <button className="dropdown-item" onClick={() => setActiveComponent('BorcAlacakFisleri')}>
+                Borç Alacak Fişleri
+              </button>
+            </li>
+            <li>
+              <button className="dropdown-item" onClick={() => setActiveComponent('CariVirman')}>
+                Cari Virman
+              </button>
+            </li>
+            <li>
+              <button className="dropdown-item" onClick={() => setActiveComponent('CariTaksitOdeme')}>
+                Cari Taksit Ödeme
+              </button>
+            </li>
+            <li>
+              <button className="dropdown-item" onClick={() => setActiveComponent('FaturaTahsilatOdeme')}>
+                Fatura Tahsilat/Ödeme
+              </button>
+            </li>
           </ul>
         </div>
         <div className="dropdown me-2">
@@ -43,11 +91,10 @@ export default function CariIslemler() {
             Fatura Kaydı
           </button>
           <ul className="dropdown-menu">
-            <li><a className="dropdown-item" href="#">Nakit/Kredi Kartı/Banka</a></li>
-            <li><a className="dropdown-item" href="#">Borç Alacak Fişleri</a></li>
-            <li><a className="dropdown-item" href="#">Cari Virman</a></li>
-            <li><a className="dropdown-item" href="#">Cari Taksit Ödeme</a></li>
-            <li><a className="dropdown-item" href="#">Fatura Tahsilat/Ödeme</a></li>
+            <li><a className="dropdown-item" href="#">Alış Yap(Ürün/Hizmet Al)</a></li>
+            <li><a className="dropdown-item" href="#">Alıştan İade Ver</a></li>
+            <li><a className="dropdown-item" href="#">Satış Yap</a></li>
+            <li><a className="dropdown-item" href="#">Satıştan İade Al</a></li>
           </ul>
         </div>
 
@@ -56,11 +103,9 @@ export default function CariIslemler() {
             Çek Kaydı
           </button>
           <ul className="dropdown-menu">
-            <li><a className="dropdown-item" href="#">Nakit/Kredi Kartı/Banka</a></li>
-            <li><a className="dropdown-item" href="#">Borç Alacak Fişleri</a></li>
-            <li><a className="dropdown-item" href="#">Cari Virman</a></li>
-            <li><a className="dropdown-item" href="#">Cari Taksit Ödeme</a></li>
-            <li><a className="dropdown-item" href="#">Fatura Tahsilat/Ödeme</a></li>
+            <li><a className="dropdown-item" href="#">Müşteri/Tedarikçi Alınan Çek Kaydı</a></li>
+            <li><a className="dropdown-item" href="#">Müşteri/Tedarikçi Verilen Kendi Çekimiz</a></li>
+            <li><a className="dropdown-item" href="#">Müşteri/Tedarikçi Verilen  Portföydeki Çekimiz</a></li>
           </ul>
         </div>
         <div className="dropdown me-2" >
@@ -69,11 +114,9 @@ export default function CariIslemler() {
 
           </button>
           <ul className="dropdown-menu">
-            <li><a className="dropdown-item" href="#">Nakit/Kredi Kartı/Banka</a></li>
-            <li><a className="dropdown-item" href="#">Borç Alacak Fişleri</a></li>
-            <li><a className="dropdown-item" href="#">Cari Virman</a></li>
-            <li><a className="dropdown-item" href="#">Cari Taksit Ödeme</a></li>
-            <li><a className="dropdown-item" href="#">Fatura Tahsilat/Ödeme</a></li>
+            <li><a className="dropdown-item" href="#">Müşteri/Tedarikçi Alınan Senet Kaydı</a></li>
+            <li><a className="dropdown-item" href="#">Müşteri/Tedarikçi Verilen Kendi Senedimiz</a></li>
+            <li><a className="dropdown-item" href="#">Müşteri/Tedarikçi Verilen  Portföydeki Senedimiz</a></li>
           </ul>
         </div>
 
@@ -83,11 +126,12 @@ export default function CariIslemler() {
             Son 3 Ayın Göster
           </button>
           <ul className="dropdown-menu">
-            <li><a className="dropdown-item" href="#">Nakit/Kredi Kartı/Banka</a></li>
-            <li><a className="dropdown-item" href="#">Borç Alacak Fişleri</a></li>
-            <li><a className="dropdown-item" href="#">Cari Virman</a></li>
-            <li><a className="dropdown-item" href="#">Cari Taksit Ödeme</a></li>
-            <li><a className="dropdown-item" href="#">Fatura Tahsilat/Ödeme</a></li>
+            <li><a className="dropdown-item" href="#">Bu Yılın Göster</a></li>
+            <li><a className="dropdown-item" href="#">Son 1 Ayın Göster</a></li>
+            <li><a className="dropdown-item" href="#">Son 3 Ayın Göster</a></li>
+            <li><a className="dropdown-item" href="#">Son 6 Ayın Göster</a></li>
+            <li><a className="dropdown-item" href="#">Son 12 Ayın Göster</a></li>
+            <li><a className="dropdown-item" href="#">Tümünü Göster</a></li>
           </ul>
         </div>
 
@@ -97,52 +141,20 @@ export default function CariIslemler() {
             İzleme
           </button>
           <ul className="dropdown-menu">
-            <li><a className="dropdown-item" href="#">Nakit/Kredi Kartı/Banka</a></li>
-            <li><a className="dropdown-item" href="#">Borç Alacak Fişleri</a></li>
-            <li><a className="dropdown-item" href="#">Cari Virman</a></li>
-            <li><a className="dropdown-item" href="#">Cari Taksit Ödeme</a></li>
-            <li><a className="dropdown-item" href="#">Fatura Tahsilat/Ödeme</a></li>
+            <li><a className="dropdown-item" href="#">Fatura İzleme</a></li>
+            <li><a className="dropdown-item" href="#">Çek/Senet İzleme</a></li>
+            <li><a className="dropdown-item" href="#">Çek/Senet Fiş Yazdır</a></li>
           </ul>
         </div>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-          Launch demo modal
-        </button>
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div className="modal-body row d-flex align-items-center">
-                <div className='col-4'>
-                  Müşteri/Tedarikçi
-                </div>
-                <div className='col-8'>
-                  <select className="form-select" aria-label="Default select example">
-                    <option selected>Müşteri/Tedarikçi Seçin</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>
-                </div>
-              </div>
 
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <button className="btn btn-success" type="button" aria-expanded="false">
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
           Cari Seç/Değiştir
+
         </button>
+        
 
       </div>
-
-
 
       <div className="custom-dashboard-bg d-flex flex-column vh-100 rounded rounded-5">
         <div className='custom-cari-bg flex-grow-1 rounded-2 mb-2'>
@@ -162,19 +174,28 @@ export default function CariIslemler() {
               </tr>
             </thead>
             <tbody>
-              <td scope="col">İşlemler</td>
-              <td scope="col">İşlemler</td>
-              <td scope="col">İşlemler</td>
-              <td scope="col">İşlemler</td>
-              <td scope="col">İşlemler</td>
-              <td scope="col">İşlemler</td>
-              <td scope="col">İşlemler</td>
-              <td scope="col">İşlemler</td>
+
+              {
+                selectedMusteriTedarikci.cariFisHareketDtoList.map((data) => (
+                  <tr>
+                    <td scope="col">{ }</td>
+                    <td scope="col">{data.islemTarihi}</td>
+                    <td scope="col">{data.islemCinsi}</td>
+                    <td scope="col">{data.aciklama}</td>
+                    <td scope="col">{ }</td>
+                    <td scope="col">{data.borc}</td>
+                    <td scope="col">{data.alacak}</td>
+                    <td scope="col">{data.bakiye}</td>
+                  </tr>
+                ))
+              }
             </tbody>
+
           </table>
         </div>
       </div>
-
+      {/* modals*/}
+      <NakitKrediKartiBanka/>
 
     </div>
   )
