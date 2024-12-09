@@ -3,7 +3,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../store/actions/sidebarSlice";
 import MenuIcon from "@mui/icons-material/Menu";
-import { logout } from "../store/actions/userSlice";
+import { logout } from "../store/actions/userAction";
 import { useNavigate } from "react-router-dom";
 
 export default function Header() {
@@ -18,13 +18,8 @@ export default function Header() {
 
   const handleLogout=()=>{
     dispatch(logout())
-
     navigate("/login")
-
   }
-
-
-
 
 
   return (
