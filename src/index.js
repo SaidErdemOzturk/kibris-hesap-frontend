@@ -6,10 +6,10 @@ import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'react-toastify/dist/ReactToastify.css';
+import "primereact/resources/themes/lara-light-cyan/theme.css";
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { configureStore } from './store/configureStore';
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={configureStore()}>

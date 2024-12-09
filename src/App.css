@@ -30,3 +30,21 @@
 .p-tree-container {
   padding-left: 5px;
 }
+
+.side-menu-item{
+  color: #ffffff;
+}
+
+.side-menu-item .MuiListItemIcon-root {
+  color: white;
+}
+.sidebar {
+  min-height: 100vh; /* Minimum yüksekliği ekranın tamamı */
+  overflow: hidden; /* Taşmayı gizle */
+  transition: width 0.3s ease; /* Genişlik animasyonu */
+  background-color: #424f63; /* Arka plan rengi */
+}
+
+.modal-bg{
+  background-color: #65cea7; /* Arka plan rengi */
+}
