@@ -12,10 +12,10 @@ import CariIslemler from '../layouts/CariIslemler'
 export default function MenuPage() {
     return (
         <div>
-            <div className="row vh-100">
-                <div className="col-2 custom-tree-bg"><TreeMap /></div>
+            <div className="d-flex">
+                <div className=""><TreeMap /></div>
 
-                <div className="col-10 d-flex flex-column min-vh-100 custom-dashboard-bg ">
+                <div className="flex-grow-1 d-flex flex-column min-vh-100 custom-dashboard-bg p-2">
                     <Header />
                     <Routes>
                     <Route path="/index" Component={CariTanitim} />
