@@ -4,7 +4,7 @@ import axios from "axios";
 export default class CariIslemlerService {
 
     getCariIslemler(cariId) {
-        const token = localStorage.getItem("token"); // Token'i al
+        const token = localStorage.getItem("token");
         if (!token) {
             console.error("Token bulunamadı!");
             return Promise.reject("Token bulunamadı!");
@@ -13,8 +13,43 @@ export default class CariIslemlerService {
         return axios.post("https://apitest.kibrishesap.com/api/Cari/CariHareketleri",{cariId}, 
             {
                 headers: {
-                    'Authorization': `Bearer ${token}`, // Bearer Token başlığı
-                    'Content-Type': 'application/json'  // Doğru içerik türünü belirt
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            }
+        );
+    }
+
+    cariİslemSil(cariId,fisBaslikId){
+
+        console.log(cariId,fisBaslikId)
+        const token = localStorage.getItem("token");
+        if (!token) {
+            console.error("Token bulunamadı!");
+            return Promise.reject("Token bulunamadı!");
+        }
+        return axios.post("https://apitest.kibrishesap.com/api/Cari/CariFisSil",{cariId,fisBaslikId}, 
+            {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            }
+        );
+    }
+
+    cariİslemGuncelle(belgeNo,aciklama,tutar,islemTarihi,fisBaslikId,cariId){
+
+        const token = localStorage.getItem("token");
+        if (!token) {
+            console.error("Token bulunamadı!");
+            return Promise.reject("Token bulunamadı!");
+        }
+        return axios.post("https://apitest.kibrishesap.com/api/Cari/CariFisKayitUpdate",{belgeNo,aciklama,tutar,islemTarihi,fisBaslikId,cariId}, 
+            {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
                 }
             }
         );
