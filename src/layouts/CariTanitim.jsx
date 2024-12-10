@@ -25,7 +25,7 @@ export default function CariTanitim() {
 
     return (
 
-        <div className="custom-dashboard-bg d-flex flex-column vh-100 rounded rounded-5">
+        <div className="custom-dashboard-bg d-flex flex-column rounded rounded-5">
             <div>
                 <button type="button" className="btn btn-success mb-2 me-2 mt-3">Yeni Müşteri Ekle</button>
                 <button type="button" className="btn btn-success mb-2 mt-3">Excelden Yükleme</button>

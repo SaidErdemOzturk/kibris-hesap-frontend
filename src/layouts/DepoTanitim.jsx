@@ -24,7 +24,7 @@ export default function DepoTanitim() {
   }
 
   return (
-    <div className="custom-dashboard-bg d-flex flex-column vh-100 rounded rounded-5">
+    <div className="custom-dashboard-bg d-flex flex-column rounded rounded-5">
       <div>
         <button
           type="button"
