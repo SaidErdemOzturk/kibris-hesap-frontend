@@ -27,9 +27,9 @@ export default function SifreDegistir() {
 
     return (
 
-        <div className="custom-dashboard-bg d-flex flex-column vh-100 rounded rounded-5">
+        <div className="custom-dashboard-bg rounded rounded-5">
+                <h3 className='m-auto'>Şifre Güncelle</h3>
             <div className='d-flex flex-column align-items-center justify-content-between rounded-2 mb-2'>
-                <h3>Şifre Güncelle</h3>
                 <div className='d-flex form-group  m-2'>
 
                 <label className='col-4 col-form-label' >Eski Şifre</label>
