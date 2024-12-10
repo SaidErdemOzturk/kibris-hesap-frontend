@@ -17,6 +17,7 @@ export default function SifreDegistir() {
             if (result.data.geriBildirimDto.kodu != 0) {
                 toast.error(result.data.geriBildirimDto.aciklama)
             } else {
+                toast.success("Şifre Değiştirme Başarılı!")
                 navigate("/")
             }
         })
