@@ -1,50 +1,50 @@
 import axios from "axios";
 
 export default class MenuService {
-    
-    
+
+
     login(eposta, sifre) {
         const headers = {
             'ePosta': eposta,
             'sifre': sifre
         };
 
-        
-        return axios.post("https://apitest.kibrishesap.com/api/Menu/Login", 
-            { eposta, sifre }, 
-            { headers } 
+
+        return axios.post("https://apitest.kibrishesap.com/api/Menu/Login",
+            { eposta, sifre },
+            { headers }
         );
     }
 
-    yeniUyeOlustur(isim,eposta,telefon,sifre,sifreTekrar){
-        let siteWebYeniUyeUrl="string"
-        return axios.post("https://apitest.kibrishesap.com/api/Menu/YeniUyeOlustur",{isim,eposta,telefon,sifre,sifreTekrar,siteWebYeniUyeUrl}
+    yeniUyeOlustur(isim, eposta, telefon, sifre, sifreTekrar) {
+        let siteWebYeniUyeUrl = "string"
+        return axios.post("https://apitest.kibrishesap.com/api/Menu/YeniUyeOlustur", { isim, eposta, telefon, sifre, sifreTekrar, siteWebYeniUyeUrl }
         );
     }
-    yeniUyeOlustur(isim,ePosta,cepTelefonu,sifre,sifreTekrar){
-        let siteWebYeniUyeUrl="localhost:3000/yeniUye/"
-        return axios.post("https://apitest.kibrishesap.com/api/Menu/YeniUyeOlustur",JSON.stringify({isim,ePosta,cepTelefonu,sifre,sifreTekrar,siteWebYeniUyeUrl})
-        );
-    }
-
-    sifreGonder(ePosta){
-        let siteWebSifreGonderUrl="localhost:3000/sifreOlustur/"
-        return axios.post("https://apitest.kibrishesap.com/api/Menu/SifreGonder",{ePosta,siteWebSifreGonderUrl}
+    yeniUyeOlustur(isim, ePosta, cepTelefonu, sifre, sifreTekrar) {
+        let siteWebYeniUyeUrl = "localhost:3000/yeniUye/"
+        return axios.post("https://apitest.kibrishesap.com/api/Menu/YeniUyeOlustur", JSON.stringify({ isim, ePosta, cepTelefonu, sifre, sifreTekrar, siteWebYeniUyeUrl })
         );
     }
 
-    sifreDegistir(token,sifre,sifreTekrar){
-        return axios.post("https://apitest.kibrishesap.com/api/Menu/SifreOlustur",{token,sifre,sifreTekrar}
+    sifreGonder(ePosta) {
+        let siteWebSifreGonderUrl = "localhost:3000/sifreOlustur/"
+        return axios.post("https://apitest.kibrishesap.com/api/Menu/SifreGonder", { ePosta, siteWebSifreGonderUrl }
         );
     }
 
-    sifreGuncelle(eskiSifre,yeniSifre,yeniSifreTekrar){
+    sifreDegistir(token, sifre, sifreTekrar) {
+        return axios.post("https://apitest.kibrishesap.com/api/Menu/SifreOlustur", { token, sifre, sifreTekrar }
+        );
+    }
+
+    sifreGuncelle(eskiSifre, yeniSifre, yeniSifreTekrar) {
         const token = localStorage.getItem("token");
         if (!token) {
             console.error("Token bulunamadı!");
             return Promise.reject("Token bulunamadı!");
         }
-        return axios.post("https://apitest.kibrishesap.com/api/Menu/SifreDegistir",{eskiSifre,yeniSifre,yeniSifreTekrar},
+        return axios.post("https://apitest.kibrishesap.com/api/Menu/SifreDegistir", { eskiSifre, yeniSifre, yeniSifreTekrar },
             {
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -54,8 +54,23 @@ export default class MenuService {
         );
     }
 
-    yeniUyeDogrula(token){
-        return axios.post("https://apitest.kibrishesap.com/api/Menu/YeniUyeDogrula",{token}
+    yeniUyeDogrula(token) {
+        return axios.post("https://apitest.kibrishesap.com/api/Menu/YeniUyeDogrula", { token }
+        );
+    }
+
+    dashboard() {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            console.error("Token bulunamadı!");
+            return Promise.reject("Token bulunamadı!");
+        }
+        return axios.post("https://apitest.kibrishesap.com/api/Menu/Dashboard", {}, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        }
         );
     }
 
