@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import MusteriTedarikciService from "../services/musteriTedarikciService";
 import CariIslemlerService from "../services/cariIslemlerService";
-import NakitKrediKartiBanka from "../modals/cariHareketKaydiModals/NakitKrediKartiBanka";
-import CariHareketUpdate from "../modals/cariHareketKaydiModals/CariHareketUpdate";
+import NakitKrediKartiBanka from "../modals/CariIslemler/CariHareketKaydiModals/NakitKrediKartiBanka";
+import CariHareketUpdate from "../modals/CariIslemler/CariHareketKaydiModals/CariHareketUpdate";
 import BrushIcon from '@mui/icons-material/Brush';
 
 export default function CariIslemler() {

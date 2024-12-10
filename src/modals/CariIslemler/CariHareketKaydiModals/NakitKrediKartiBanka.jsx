@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import MusteriTedarikciService from "../../services/musteriTedarikciService";
+import MusteriTedarikciService from "../../../services/musteriTedarikciService";
 import { toast } from "react-toastify";
 import { Calendar } from "primereact/calendar";
 

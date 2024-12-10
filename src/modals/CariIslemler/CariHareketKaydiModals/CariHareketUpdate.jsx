@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import CariIslemlerService from "../../services/cariIslemlerService";
+import CariIslemlerService from "../../../services/cariIslemlerService";
 
 export default function CariHareketUpdate({cariHareket}) {
     const [date, setDate] = useState("");
