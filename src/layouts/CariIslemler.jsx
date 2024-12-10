@@ -300,8 +300,8 @@ export default function CariIslemler() {
                   <td scope="col">
                     {
                       <button
-                        className="dropdown-item"
-                        data-bs-toggle="modal"
+                      className="border-0 bg-transparent"
+                      data-bs-toggle="modal"
                         onClick={()=>handleCariHareketUpdate(JSON.stringify(cariHareket))}
                         data-bs-target="#cariHareketUpdateModal"
                       >
