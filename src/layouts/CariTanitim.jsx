@@ -10,14 +10,16 @@ export default function CariTanitim() {
     const [musteriler, setMusteriler] = useState([{ unvani: "", yetkiliKisi: "", cepTelefonu1: "", vergiDairesi: "", adres: "", paraBirimi: "", pasif: false }])
 
     useEffect(() => {
-        let musteriTedarikciService = new MusteriTedarikciService()
-        musteriTedarikciService.getMusteriTedarikci(id).then((result) => {
-            if (result.data.geriBildirimDto.kodu != 0) {
-                toast.error(result.data.geriBildirimDto.aciklama)
-            } else {
-                setMusteriler(result.data.cariDtoList)
-            }
-        })
+        if(id){
+            let musteriTedarikciService = new MusteriTedarikciService()
+            musteriTedarikciService.getMusteriTedarikci(id).then((result) => {
+                if (result.data.geriBildirimDto.kodu != 0) {
+                    toast.error(result.data.geriBildirimDto.aciklama)
+                } else {
+                    setMusteriler(result.data.cariDtoList)
+                }
+            })
+        }
     }, [id])
 
 
