@@ -6,6 +6,7 @@ import MenuPage from './pages/MenuPage';
 import { useSelector } from 'react-redux';
 
 import { PrimeReactProvider, PrimeReactContext } from 'primereact/api';
+import Dashboard from './pages/Dashboard';
 
 function App() {
   const { user } = useSelector(state => state.user) || { user: {} }; // user'ı boş obje olarak default yapıyoruz
@@ -20,8 +21,7 @@ function App() {
           <MenuPage />
         ) : (
           <div>
-      <LoginPage />
-
+            <Dashboard/>
             </div>
         )
       }

@@ -17,7 +17,7 @@ export default function RegisterPage() {
 
     const handleNewUser=()=> {
         let menuService = new MenuService()
-        menuService.newUser(isim,telefon,eposta,sifre,sifreTekrar).then((result)=>{
+        menuService.yeniUyeOlustur(isim,telefon,eposta,sifre,sifreTekrar).then((result)=>{
             if (result.data.geriBildirimDto.kodu != 0) {
                 toast.error(result.data.geriBildirimDto.aciklama)
             } else {

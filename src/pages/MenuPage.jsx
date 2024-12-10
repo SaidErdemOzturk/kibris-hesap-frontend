@@ -8,6 +8,8 @@ import LoginPage from '../pages/LoginPage'
 import Urunler from '../layouts/Urunler'
 import DepoTanitim from '../layouts/DepoTanitim'
 import CariIslemler from '../layouts/CariIslemler'
+import SifreGonder from './SifreGonder'
+import SifreGuncelle from '../layouts/SifreGuncelle'
 
 export default function MenuPage() {
     return (
@@ -21,9 +23,11 @@ export default function MenuPage() {
                     <Route path="/index" Component={CariTanitim} />
                     <Route path="/cariTanitim/:id" Component={CariTanitim} />
                     <Route path="/login" Component={LoginPage} />
+                    <Route path="/sifreGonder" Component={SifreGonder} />
                     <Route path="/urunler" Component={Urunler} />
                     <Route path="/depoTanitim" Component={DepoTanitim} />
                     <Route path="/cariIslemler" Component={CariIslemler} />
+                    <Route path="/sifreGuncelle" Component={SifreGuncelle} />
                     </Routes>
                 </div>
             </div>

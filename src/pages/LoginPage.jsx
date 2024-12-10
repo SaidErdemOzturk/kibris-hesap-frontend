@@ -53,7 +53,7 @@ export default function LoginPage() {
                                 Beni Hatırla
                             </label>
                         </div>
-                        <p><a href="#" className="link-underline-light d-flex justify-content-end">Şifremi unuttum</a></p>
+                        <p><a href="sifreGonder" className="link-underline-light d-flex justify-content-end">Şifremi unuttum</a></p>
                         <button type="button" className="btn btn-primary w-100 rounded-pill mb-3" onClick={() => handleSignIn()}>Giriş Yap</button>
                         <label className="form-check-label mb-3" htmlFor="flexCheckDefault">
                             Hesabınız yok mu

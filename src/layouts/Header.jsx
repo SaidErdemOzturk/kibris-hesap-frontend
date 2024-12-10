@@ -18,7 +18,7 @@ export default function Header() {
 
   const handleLogout=()=>{
     dispatch(logout())
-    navigate("/login")
+    navigate("/")
   }
 
 
@@ -49,8 +49,8 @@ export default function Header() {
           </button>
           <ul className="dropdown-menu">
             <li>
-              <a className="dropdown-item" href="#">
-                Şifre Değiştir
+              <a className="dropdown-item" href="sifreGuncelle">
+                Şifre Güncelle
               </a>
             </li>
             <li>
