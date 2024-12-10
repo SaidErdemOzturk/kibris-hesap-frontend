@@ -21,9 +21,9 @@ export default class MenuService {
         return axios.post("https://apitest.kibrishesap.com/api/Menu/YeniUyeOlustur",{isim,eposta,telefon,sifre,sifreTekrar,siteWebYeniUyeUrl}
         );
     }
-    yeniUyeOlustur(token){
-        let siteWebYeniUyeUrl="string"
-        return axios.post("https://apitest.kibrishesap.com/api/Menu/YeniUyeDogrula",JSON.stringify({token})
+    yeniUyeOlustur(isim,ePosta,cepTelefonu,sifre,sifreTekrar){
+        let siteWebYeniUyeUrl="localhost:3000/yeniUye/"
+        return axios.post("https://apitest.kibrishesap.com/api/Menu/YeniUyeOlustur",JSON.stringify({isim,ePosta,cepTelefonu,sifre,sifreTekrar,siteWebYeniUyeUrl})
         );
     }
 
@@ -51,6 +51,11 @@ export default class MenuService {
                     'Content-Type': 'application/json'
                 }
             }
+        );
+    }
+
+    yeniUyeDogrula(token){
+        return axios.post("https://apitest.kibrishesap.com/api/Menu/YeniUyeDogrula",{token}
         );
     }
 
