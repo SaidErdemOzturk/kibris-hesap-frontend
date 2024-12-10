@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useDraggable } from "@dnd-kit/core";
 
-export function TableVarliklar(props) {
-  const [varliklarToplam, setVarliklarToplam] = useState(0);
-
+export function TableBorclar(props) {
+  const [borclarToplam, setBorclarToplam] = useState(0);
 
   useEffect(() => {
-    for (let index = 0; index < props.varlik.length; index++) {
-      setVarliklarToplam(varliklarToplam + props.varlik[index].bakiye);
+    for (let index = 0; index < props.borclar.length; index++) {
+      setBorclarToplam(borclarToplam + props.borclar[index].bakiye);
     }
-  }, [props.varlik]);
+  }, [props.borclar]);
 
-  
   /*
   const {attributes, listeners, setNodeRef, transform} = useDraggable({
     id: 'draggable',
@@ -22,17 +20,17 @@ export function TableVarliklar(props) {
 
 */
 
-
   return (
     <div
     style={{width:props.width,height:props.height}}
-      className=" border border-2 rounded  bg-light "
-     /* ref={setNodeRef}
+      className=" border border-2 rounded bg-light"
+      /*
+      ref={setNodeRef}
       style={style}
       {...listeners}
       {...attributes}*/
     >
-      <h5>Varlıklar - {varliklarToplam}</h5>
+      <h5>Borçlar - {borclarToplam}</h5>
       <table className="table">
         <thead className="table-primary">
           <tr>
@@ -41,7 +39,7 @@ export function TableVarliklar(props) {
           </tr>
         </thead>
         <tbody>
-          {props.varlik.map((varlik) => (
+          {props.borclar.map((varlik) => (
             <tr>
               <td scope="col">{varlik.hesapAdi}</td>
               <td scope="col">{varlik.bakiye}</td>

@@ -89,7 +89,7 @@ export default function TreeMap() {
       >
         {isMenuOpen && (
           <List className="">
-            <Link to="index">
+            <Link to="/">
               <ListItem button className="side-menu-item">
 
                 <ListItemIcon>
