@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {useDraggable} from '@dnd-kit/core';
 
 export function TableVarliklar(props) {
+  const [varliklarToplam, setVarliklarToplam] = useState(0)
+
+
+  useEffect(() => {
+    for (let index = 0; index < props.varlik.length; index++) {
+      setVarliklarToplam(varliklarToplam+props.varlik[index].bakiye)
+    }
+  }, [props.varlik])
+
+
+  
   const {attributes, listeners, setNodeRef, transform} = useDraggable({
     id: 'draggable',
   });
@@ -10,11 +21,11 @@ export function TableVarliklar(props) {
   } : undefined;
 
 
+
   
   return (
     <div className='w-25 h-25 border border-5' ref={setNodeRef} style={style} {...listeners} {...attributes}>
-      <h5>Varlıklar</h5>
-      {console.log("dasdsldlssllslsll",props.varlik)}
+      <h5>Varlıklar - {varliklarToplam}</h5>
       <table className="table ">
             <thead className="table-primary">
               <tr>
@@ -35,7 +46,6 @@ export function TableVarliklar(props) {
               ))}
             </tbody>
           </table>
-      Deneme
     </div>
   );
 }
