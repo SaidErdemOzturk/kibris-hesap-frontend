@@ -58,7 +58,7 @@ export default function TreeMap() {
   const toggleProducts = () => {
     setIsProductsOpen(!isProductsOpen);
   };
-  
+
   const toggleFinance = () => {
     setIsFinanceOpen(!isFinanceOpen);
   };
@@ -67,7 +67,7 @@ export default function TreeMap() {
     setIsStoryOpen(!isStoryOpen);
   };
 
-  const toggleTrade= () => {
+  const toggleTrade = () => {
     setIsTradeOpen(!isTradeOpen);
   };
 
@@ -82,63 +82,65 @@ export default function TreeMap() {
   return (
     <div className="d-flex" >
       <Box
-      className="sidebar" 
+        className="sidebar"
         sx={{
-          width: isMenuOpen ? 250 : 0, 
+          width: isMenuOpen ? 250 : 0,
         }}
       >
         {isMenuOpen && (
           <List className="">
-            <ListItem button className="side-menu-item">
-              
-              <ListItemIcon>
-                <HomeIcon  /> 
-              </ListItemIcon>
-              <ListItemText primary="Anasayfa"  />
-            </ListItem>
+            <Link to="index">
+              <ListItem button className="side-menu-item">
+
+                <ListItemIcon>
+                  <HomeIcon />
+                </ListItemIcon>
+                <ListItemText primary="Anasayfa" />
+              </ListItem>
+            </Link>
 
             <Link to="/cariTanitim/1" className="text-white text-decoration-none">
-            <ListItem button className="side-menu-item">
-            <ListItemIcon>
-                <AccountTreeIcon /> 
-              </ListItemIcon>
-              <ListItemText primary="Müşteriler"/>
-            </ListItem>
+              <ListItem button className="side-menu-item">
+                <ListItemIcon>
+                  <AccountTreeIcon />
+                </ListItemIcon>
+                <ListItemText primary="Müşteriler" />
+              </ListItem>
             </Link>
 
 
             <Link to="/cariTanitim/2" className="text-white text-decoration-none">
-            
-            <ListItem button className="side-menu-item">
-            <ListItemIcon>
-                <FactoryIcon  />
-              </ListItemIcon>
-              <ListItemText primary="Tedarikçiler" />
-            </ListItem>
+
+              <ListItem button className="side-menu-item">
+                <ListItemIcon>
+                  <FactoryIcon />
+                </ListItemIcon>
+                <ListItemText primary="Tedarikçiler" />
+              </ListItem>
             </Link>
 
             <ListItem button onClick={toggleProducts} className="side-menu-item">
               <ListItemIcon>
-                <KeyboardArrowRightIcon/>
-                <LocalOfferIcon className="mx-2"/>
+                <KeyboardArrowRightIcon />
+                <LocalOfferIcon className="mx-2" />
               </ListItemIcon>
               <ListItemText primary="Ürünler" />
             </ListItem>
             <Collapse in={isProductsOpen} timeout="auto" unmountOnExit>
               <List component="div" disablePadding className="side-menu-item">
-              <Link to="/urunler" className="text-white text-decoration-none">
+                <Link to="/urunler" className="text-white text-decoration-none">
 
-                <ListItem button className="px-4">
-                  <ListItemText primary="Ürün & Hizmet Tanıtımı" />
-                </ListItem>
+                  <ListItem button className="px-4">
+                    <ListItemText primary="Ürün & Hizmet Tanıtımı" />
+                  </ListItem>
                 </Link>
 
-            <Link to="/depoTanitim" className="text-white text-decoration-none">
+                <Link to="/depoTanitim" className="text-white text-decoration-none">
 
-                <ListItem button className="px-4 text-decoration">
-                  <ListItemText primary="Depo Tanıtımı" />
-                </ListItem>
-            </Link>
+                  <ListItem button className="px-4 text-decoration">
+                    <ListItemText primary="Depo Tanıtımı" />
+                  </ListItem>
+                </Link>
 
               </List>
             </Collapse>
@@ -146,38 +148,38 @@ export default function TreeMap() {
 
 
             <Link to="/cariIslemler" className="text-white text-decoration-none">
-            <ListItem button className="side-menu-item">
-            <ListItemIcon>
-                <ContactEmergencyIcon /> 
-              </ListItemIcon>
-              <ListItemText primary="Cari İşlemler"/>
-            </ListItem>
+              <ListItem button className="side-menu-item">
+                <ListItemIcon>
+                  <ContactEmergencyIcon />
+                </ListItemIcon>
+                <ListItemText primary="Cari İşlemler" />
+              </ListItem>
             </Link>
 
 
             <Link to="/cariTanitim/1">
-            <ListItem button className="side-menu-item">
-            <ListItemIcon>
-                <ConfirmationNumberIcon /> 
-              </ListItemIcon>
-              <ListItemText primary="Alış/Satış Faturalar"/>
-            </ListItem>
+              <ListItem button className="side-menu-item">
+                <ListItemIcon>
+                  <ConfirmationNumberIcon />
+                </ListItemIcon>
+                <ListItemText primary="Alış/Satış Faturalar" />
+              </ListItem>
             </Link>
 
             <Link to="/cariTanitim/1">
-            <ListItem button className="side-menu-item">
-            <ListItemIcon>
-                <InventoryIcon /> 
-              </ListItemIcon>
-              <ListItemText primary="Stoklar"/>
-            </ListItem>
+              <ListItem button className="side-menu-item">
+                <ListItemIcon>
+                  <InventoryIcon />
+                </ListItemIcon>
+                <ListItemText primary="Stoklar" />
+              </ListItem>
             </Link>
 
-            
+
             <ListItem button onClick={toggleFinance} className="side-menu-item">
               <ListItemIcon>
-                <KeyboardArrowRightIcon/>
-                <LocalOfferIcon className="mx-2"/>
+                <KeyboardArrowRightIcon />
+                <LocalOfferIcon className="mx-2" />
               </ListItemIcon>
               <ListItemText primary="Finans/Nakit Yönetimi" />
             </ListItem>
@@ -198,15 +200,15 @@ export default function TreeMap() {
                 <ListItem button sx={{ pl: 4 }}>
                   <ListItemText primary="Senet Portföy" />
                 </ListItem>
-                
+
 
               </List>
             </Collapse>
 
             <ListItem button onClick={toggleStory} className="side-menu-item">
               <ListItemIcon>
-                <KeyboardArrowRightIcon/>
-                <LocalOfferIcon className="mx-2"/>
+                <KeyboardArrowRightIcon />
+                <LocalOfferIcon className="mx-2" />
               </ListItemIcon>
               <ListItemText primary="Mağaza/Satış" />
             </ListItem>
@@ -216,35 +218,35 @@ export default function TreeMap() {
                   <ListItemText primary="Taksitli Satış" />
                 </ListItem>
 
-                
+
 
               </List>
             </Collapse>
 
             <ListItem button onClick={toggleTrade} className="side-menu-item">
               <ListItemIcon>
-                <KeyboardArrowRightIcon/>
-                <LocalOfferIcon className="mx-2"/>
+                <KeyboardArrowRightIcon />
+                <LocalOfferIcon className="mx-2" />
               </ListItemIcon>
               <ListItemText primary="E-Ticaret" />
             </ListItem>
             <Collapse in={isTradeOpen} timeout="auto" unmountOnExit>
               <List component="div" disablePadding className="side-menu-item">
-              <ListItem button sx={{ pl: 4 }}>
+                <ListItem button sx={{ pl: 4 }}>
                   <ListItemText primary="Satışlar" />
                 </ListItem>
                 <ListItem button sx={{ pl: 4 }}>
                   <ListItemText primary="Mağaza" />
                 </ListItem>
-                
+
 
               </List>
             </Collapse>
 
             <ListItem button onClick={toggleSettings} className="side-menu-item">
               <ListItemIcon>
-                <KeyboardArrowRightIcon/>
-                <LocalOfferIcon className="mx-2"/>
+                <KeyboardArrowRightIcon />
+                <LocalOfferIcon className="mx-2" />
               </ListItemIcon>
               <ListItemText primary="Ayarlar" />
             </ListItem>
@@ -265,15 +267,15 @@ export default function TreeMap() {
                 <ListItem button sx={{ pl: 4 }}>
                   <ListItemText primary="Kurlar" />
                 </ListItem>
-                
+
 
               </List>
             </Collapse>
 
             <ListItem button onClick={toggleReport} className="side-menu-item">
               <ListItemIcon>
-                <KeyboardArrowRightIcon/>
-                <LocalOfferIcon className="mx-2"/>
+                <KeyboardArrowRightIcon />
+                <LocalOfferIcon className="mx-2" />
               </ListItemIcon>
               <ListItemText primary="Raporlar" />
             </ListItem>
@@ -294,11 +296,11 @@ export default function TreeMap() {
                 <ListItem button sx={{ pl: 4 }}>
                   <ListItemText primary="Cari Raporlar" />
                 </ListItem>
-                
+
 
               </List>
             </Collapse>
-            
+
 
 
           </List>

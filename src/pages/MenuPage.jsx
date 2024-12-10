@@ -10,6 +10,7 @@ import DepoTanitim from '../layouts/DepoTanitim'
 import CariIslemler from '../layouts/CariIslemler'
 import SifreGonder from './SifreGonder'
 import SifreGuncelle from '../layouts/SifreGuncelle'
+import Index from '../layouts/Index'
 
 export default function MenuPage() {
     return (
@@ -20,7 +21,7 @@ export default function MenuPage() {
                 <div className="flex-grow-1 d-flex flex-column min-vh-100 custom-dashboard-bg p-2">
                     <Header />
                     <Routes>
-                    <Route path="/index" Component={CariTanitim} />
+                    <Route exact path="/" Component={Index} />
                     <Route path="/cariTanitim/:id" Component={CariTanitim} />
                     <Route path="/login" Component={LoginPage} />
                     <Route path="/sifreGonder" Component={SifreGonder} />
