@@ -341,7 +341,7 @@ export default function YeniMusteriEkleModal({ musteriTedarikci,tipi,setMusteriT
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-success" onClick={handleKayit}>Kayıt</button>
-                        <button type="button" class="btn btn-danger" onClick={handleSil}>Sil</button>
+                        {musteriTedarikci.id?<button type="button" class="btn btn-danger"  onClick={handleSil}>Sil</button>:null}
                     </div>
                 </div>
             </div>
