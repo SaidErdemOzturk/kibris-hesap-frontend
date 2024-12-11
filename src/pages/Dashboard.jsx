@@ -10,7 +10,7 @@ export default function Dashboard() {
     return (
         <div className="flex-grow-1">
                     <Routes>
-                    <Route exact path="/" Component={LoginPage} />
+                    <Route exact path="*" Component={LoginPage} />
                     <Route path="/sifreGonder" Component={SifreGonder} />
                     <Route path="/sifreDegistir/:token" Component={SifreDegistir} />
                     <Route path="/yeniUye/" Component={RegisterPage} />

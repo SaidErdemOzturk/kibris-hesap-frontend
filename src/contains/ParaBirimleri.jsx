@@ -1,0 +1,1 @@
+export const ParaBirimi=["TR","USD","EUR","GPB"]

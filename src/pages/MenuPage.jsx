@@ -18,7 +18,7 @@ export default function MenuPage() {
             <div className="d-flex">
                 <div className=""><TreeMap /></div>
 
-                <div className="flex-grow-1 d-flex flex-column min-vh-100 custom-dashboard-bg p-2">
+                <div className="flex-grow-1 custom-dashboard-bg p-2">
                     <Header />
                     <Routes>
                     <Route exact path="/" Component={Index} />

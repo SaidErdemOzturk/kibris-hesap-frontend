@@ -80,7 +80,7 @@ export default function TreeMap() {
   };
 
   return (
-    <div className="d-flex" >
+    <div className="bg-primary" >
       <Box
         className="sidebar"
         sx={{
@@ -88,7 +88,7 @@ export default function TreeMap() {
         }}
       >
         {isMenuOpen && (
-          <List className="">
+          <List className="min-vh-100">
             <Link to="/">
               <ListItem button className="side-menu-item">
 

@@ -5,11 +5,15 @@ import { toggleMenu } from "../store/actions/sidebarSlice";
 import MenuIcon from "@mui/icons-material/Menu";
 import { logout } from "../store/actions/userAction";
 import { useNavigate } from "react-router-dom";
+import LocalStorageService from "../services/localStorageService";
 
 export default function Header() {
   const dispatch = useDispatch();
   const user =useSelector((state)=> state.user.user)
   const navigate = useNavigate()
+  const localStorageService = new LocalStorageService()
+        
+  const ePosta = localStorageService.getItemWithTime("ePosta")
 
 
   const handleToggleMenu = () => {
@@ -45,7 +49,7 @@ export default function Header() {
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            {localStorage.getItem("ePosta")}
+            {ePosta}
           </button>
           <ul className="dropdown-menu">
             <li>
