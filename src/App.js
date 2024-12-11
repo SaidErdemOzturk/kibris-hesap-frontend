@@ -7,10 +7,16 @@ import { useSelector } from 'react-redux';
 
 import { PrimeReactProvider, PrimeReactContext } from 'primereact/api';
 import Dashboard from './pages/Dashboard';
+import { useEffect } from 'react';
 
 function App() {
-  const { user } = useSelector(state => state.user) || { user: {} }; // user'ı boş obje olarak default yapıyoruz
-  console.log(user)
+  //const { user } = useSelector(state => state.user) || { user: {} }; // user'ı boş obje olarak default yapıyoruz
+  const user =useSelector((state)=> state.user.user)
+  useEffect(() => {
+
+  }, [user])
+  
+
   return (
 
 <PrimeReactProvider>

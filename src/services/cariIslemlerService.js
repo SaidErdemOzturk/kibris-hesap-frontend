@@ -1,10 +1,13 @@
 
 import axios from "axios";
+import LocalStorageService from "./localStorageService";
 
 export default class CariIslemlerService {
 
     getCariIslemler(cariId) {
-        const token = localStorage.getItem("token");
+        const localStorageService = new LocalStorageService()
+        
+        const token = localStorageService.getItemWithTime("token")
         if (!token) {
             console.error("Token bulunamadı!");
             return Promise.reject("Token bulunamadı!");
@@ -22,8 +25,9 @@ export default class CariIslemlerService {
 
     cariİslemSil(cariId,fisBaslikId){
 
-        console.log(cariId,fisBaslikId)
-        const token = localStorage.getItem("token");
+        const localStorageService = new LocalStorageService()
+        
+        const token = localStorageService.getItemWithTime("token")
         if (!token) {
             console.error("Token bulunamadı!");
             return Promise.reject("Token bulunamadı!");
@@ -40,7 +44,9 @@ export default class CariIslemlerService {
 
     cariİslemGuncelle(belgeNo,aciklama,tutar,islemTarihi,fisBaslikId,cariId){
 
-        const token = localStorage.getItem("token");
+        const localStorageService = new LocalStorageService()
+        
+        const token = localStorageService.getItemWithTime("token")
         if (!token) {
             console.error("Token bulunamadı!");
             return Promise.reject("Token bulunamadı!");

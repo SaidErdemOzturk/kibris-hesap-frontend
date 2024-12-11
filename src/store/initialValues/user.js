@@ -1,6 +1,11 @@
+import LocalStorageService from "../../services/localStorageService"
+
+
+const localStorageService = new LocalStorageService()
+        
 export const user = {
-    ePosta: localStorage.getItem("ePosta"), 
-    firmaAdi: localStorage.getItem("firmaAdi"),
-    firmaUnvani: localStorage.getItem("firmaUnvani"),
-    token: localStorage.getItem("token")
+    ePosta: localStorageService.getItemWithTime("ePosta"), 
+    firmaAdi: localStorageService.getItemWithTime("firmaAdi"),
+    firmaUnvani: localStorageService.getItemWithTime("firmaUnvani"),
+    token: localStorageService.getItemWithTime("token")
 }
