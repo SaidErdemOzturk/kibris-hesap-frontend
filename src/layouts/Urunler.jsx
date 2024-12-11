@@ -2,10 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { TipsAndUpdatesOutlined } from '@mui/icons-material'
 import UrunService from '../services/urunService'
 import { toast } from 'react-toastify'
+import UrunModal from '../modals/Urunler/UrunModal'
+import BrushIcon from '@mui/icons-material/Brush';
+
 
 export default function Urunler() {
 
-    const [urunler, setUrunler] = useState([{ adi: "", tipi: "", birimAdi: "", satisFiyati: "", satisKdvOrani: "", alisFiyati: "", alisKdvOrani: "", alisIskonto: "", urunKodu: 0, barkodu: "", kalanMiktar: 0, ETicaret: false, pasif: false }])
+    const [urunler, setUrunler] = useState([])
+    const [selectedUrunHizmet, setSelectedUrunHizmet] = useState({})
 
     useEffect(() => {
         let urunService = new UrunService()
@@ -18,10 +22,17 @@ export default function Urunler() {
         })
     }, [])
 
+    
+    const handleSelectUrunHizmet = (urunHizmet) => {
+        setSelectedUrunHizmet(urunHizmet)
+        console.log(urunHizmet)
+    }
+
     return (
         <div className="custom-dashboard-bg d-flex flex-column vh-100 rounded rounded-5">
             <div>
-                <button type="button" className="btn btn-success mb-2 me-2 mt-3">Yeni Ürün Ekle</button>
+                <button type="button" className="btn btn-success mb-2 me-2 mt-3" data-bs-target="#urunModal" data-bs-toggle="modal"
+                >Yeni Ürün Ekle</button>
                 <button type="button" className="btn btn-success mb-2 mt-3">Excelden Yükleme</button>
             </div>
             <div className='custom-cari-bg flex-grow-1 rounded-2 mb-2'>
@@ -30,7 +41,7 @@ export default function Urunler() {
                 <table className="table ">
                     <thead className='table-primary'>
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">İşlemler</th>
                             <th scope="col">Adı</th>
                             <th scope="col">Tipi</th>
                             <th scope="col">Birim</th>
@@ -49,7 +60,15 @@ export default function Urunler() {
                         {
                             urunler.map((urun) => (
                                 <tr>
-                                    <th scope="row">1</th>
+                                    <td>                                        
+                                        <button
+                                        className="border-0 bg-transparent"
+                                        data-bs-toggle="modal"
+                                        onClick={() => handleSelectUrunHizmet(urun)}
+                                        data-bs-target="#urunModal"
+                                    >
+                                        <BrushIcon />
+                                    </button></td>
                                     <td>{urun.adi}</td>
                                     <td>{urun.tipi}</td>
                                     <td>{urun.birimAdi}</td>
@@ -68,6 +87,8 @@ export default function Urunler() {
                     </tbody>
                 </table>
             </div>
+            {/**Modallar */}
+            <UrunModal urunHizmet={selectedUrunHizmet} setSelectedUrunHizmet={setSelectedUrunHizmet} />
         </div>
     )
 }
