@@ -23,7 +23,7 @@ export function TableGecikmisMasraflar(props) {
   return (
     <div
     style={{height:props.height,width:props.width}}
-      className="border border-2 rounded  bg-light"
+      className="border border-2 rounded  bg-light p-2"
       /*
       ref={setNodeRef}
       style={style}

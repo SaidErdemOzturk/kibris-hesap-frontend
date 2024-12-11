@@ -23,7 +23,7 @@ export function TableBorclar(props) {
   return (
     <div
     style={{width:props.width,height:props.height}}
-      className=" border border-2 rounded bg-light"
+      className=" border border-2 rounded bg-light p-2"
       /*
       ref={setNodeRef}
       style={style}
