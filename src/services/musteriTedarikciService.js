@@ -63,4 +63,23 @@ export default class MusteriTedarikciService {
             }
         );
     }
+
+    musteriTedarikciSablonIndir(cariTipi){
+        const localStorageService = new LocalStorageService()
+
+        const token = localStorageService.getItemWithTime("token")
+        if (!token) {
+            console.error("Token bulunamadı!");
+            return Promise.reject("Token bulunamadı!");
+        }
+        return axios.post("https://apitest.kibrishesap.com/api/MusteriTedarikci/MusteriTedarikciSablonIndir",
+            JSON.stringify({ cariTipi }),
+            {
+                headers: {
+                    'Authorization': `Bearer ${token}`, 
+                    'Content-Type': 'application/json'  
+                }
+            }
+        );
+    }
 }
