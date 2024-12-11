@@ -42,23 +42,23 @@ export default function Index() {
         }
     }*/
   return (
-    <div className="d-flex flex-wrap">
+    <div className="d-flex flex-wrap ">
       <div className="m-2">
       <TableVarliklar 
-        width={600} 
+        width={500} 
         height={250} 
         varlik={varlik} />
       </div>
 
       <div className="m-2">
 
-        <TableBorclar width={600} height={250} borclar={borclar} />
+        <TableBorclar width={500} height={250} borclar={borclar} />
       </div>
 
       <div className="m-2">
 
         <TableGecikmisMasraflar
-          width={600}
+          width={500}
           height={250}
           gecikmisMasraflar={gecikmisMasraflar}
         />
@@ -66,7 +66,7 @@ export default function Index() {
       <div className="m-2">
 
         <TableVadesiGecenCekSenetler
-          width={800}
+          width={700}
           height={250}
           vadesiGecenSenetler={vadesiGecenSenetler}
         />
@@ -74,7 +74,7 @@ export default function Index() {
       <div className="m-2">
 
         <TableYaklasanMasraflar
-          width={600}
+          width={500}
           height={250}
           yaklasanMasraflar={yaklasanMasraflar}
         />
@@ -82,7 +82,7 @@ export default function Index() {
       <div className="m-2">
       
         <TableVadesiYaklasanCekSenetler
-          width={800}
+          width={700}
           height={250}
           vadesiYaklasanSenetler={vadesiYaklasanSenetler}
         />
