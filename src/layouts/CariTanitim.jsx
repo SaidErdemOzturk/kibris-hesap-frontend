@@ -83,7 +83,7 @@ export default function CariTanitim() {
                                     <td>{musteri.vergiDairesi}</td>
                                     <td>{musteri.adres}</td>
                                     <td>{musteri.paraBirimi}</td>
-                                    <td><input class="form-check-input" type="checkbox" id="flexCheckCheckedDisabled" checked disabled /></td>
+                                    <td><input class="form-check-input" type="checkbox" id="flexCheckCheckedDisabled" checked={musteri.pasif} disabled /></td>
                                 </tr>
                             ))
                         }

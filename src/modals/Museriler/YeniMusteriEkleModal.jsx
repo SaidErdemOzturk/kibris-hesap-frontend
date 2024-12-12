@@ -196,7 +196,7 @@ export default function YeniMusteriEkleModal({ musteriTedarikci,tipi,setMusteriT
 
                             <div className=" d-flex align-items-center justify-content-between my-2">
                                 <label className="col-4">Pasif</label>
-                                <FormControlLabel control={<Switch defaultChecked onChange={(e) => handleSetMusteriTedarikci("pasif",e.target.checked)} />} label="Label" />
+                                <Switch defaultChecked onChange={(e) => handleSetMusteriTedarikci("pasif",e.target.checked)} />
                             </div>
                         </div> : null
                     }

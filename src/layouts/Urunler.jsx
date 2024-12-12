@@ -83,8 +83,8 @@ export default function Urunler() {
                                     <td>{urun.alisIskonto}</td>
                                     <td>{urun.urunKodu}</td>
                                     <td>{urun.barkodu}</td>
-                                    <td><input className="form-check-input" type="checkbox" checked={urun.eTicaret === true} disabled id="flexCheckDefault"/></td>
-                                    <td><Switch checked={urun.pasif} disabled/></td>
+                                    <td><input className="form-check-input" type="checkbox" checked={urun.eTicaret === true} disabled /></td>
+                                    <td><input className="form-check-input" type="checkbox" checked={urun.pasif === true} disabled /></td>
                                 </tr>
                             ))
                         }
