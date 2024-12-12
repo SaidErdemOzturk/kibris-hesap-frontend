@@ -166,10 +166,10 @@ export default function UrunModal({ selectedUrunHizmet, setSelectedUrunHizmet })
 
                             <div className=" d-flex align-items-center justify-content-between my-2">
                                 <label className="col-4">Pasif</label>
-                                <FormControlLabel control={<Switch defaultChecked onChange={(e) => handleSetUrunHizmet("pasif", e.target.checked)} />} />
+                                <FormControlLabel control={<Switch defaultChecked={selectedUrunHizmet.pasif} onChange={(e) => handleSetUrunHizmet("pasif", e.target.checked)} />} />
                                 <div>
-                                    <input className="form-check-input" type="checkbox" id="flexCheckDefault" onChange={(e) => { handleSetUrunHizmet("eTicaret", e.target.checked) }} />
-                                    <label className="form-check-label mx-2" for="flexCheckDefault" >
+                                    <input className="form-check-input" type="checkbox" checked={selectedUrunHizmet.eTicaret === true} id="flexCheckDefault" onChange={(e) => { handleSetUrunHizmet("eTicaret", e.target.checked) }} />
+                                    <label className="form-check-label mx-2" for="flexCheckDefault">
                                         E-Ticaret
                                     </label>
                                 </div>
@@ -357,8 +357,7 @@ export default function UrunModal({ selectedUrunHizmet, setSelectedUrunHizmet })
                     }
 
                     <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal"
-                            aria-label="Close"onClick={handleKayit}>Kayıt</button>
+                    <button type="button" class="btn btn-success" onClick={handleKayit}>Kayıt</button>
                     {selectedUrunHizmet.id?<button type="button" class="btn btn-danger" onClick={handleSil}>Sil</button>:null}
                     </div>
                 </div>

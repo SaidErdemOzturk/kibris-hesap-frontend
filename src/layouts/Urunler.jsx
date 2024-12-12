@@ -31,7 +31,9 @@ export default function Urunler() {
     return (
         <div className="custom-dashboard-bg d-flex flex-column vh-100 rounded rounded-5">
             <div>
-                <button type="button" className="btn btn-success mb-2 me-2 mt-3" data-bs-target="#urunModal" data-bs-toggle="modal"
+                <button type="button" className="btn btn-success mb-2 me-2 mt-3"
+                data-bs-target="#urunModal" 
+                data-bs-toggle="modal"
                 onClick={()=>handleSelectUrunHizmet({})}
                 >Yeni Ürün Ekle</button>
                 <button type="button" className="btn btn-success mb-2 mt-3">Excelden Yükleme</button>
