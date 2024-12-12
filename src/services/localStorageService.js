@@ -26,7 +26,6 @@ export default class LocalStorageService {
         const item = JSON.parse(itemStr);
         const now = new Date();
         
-        console.log(item," - -",now.getTime())
 
     
         if (now.getTime() > item.expiry) {

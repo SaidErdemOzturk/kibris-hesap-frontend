@@ -20,7 +20,7 @@ export default function Urunler() {
                 setUrunler(result.data.urunDtoList)
             }
         })
-    }, [])
+    }, [selectedUrunHizmet])
 
     
     const handleSelectUrunHizmet = (urunHizmet) => {
@@ -32,6 +32,7 @@ export default function Urunler() {
         <div className="custom-dashboard-bg d-flex flex-column vh-100 rounded rounded-5">
             <div>
                 <button type="button" className="btn btn-success mb-2 me-2 mt-3" data-bs-target="#urunModal" data-bs-toggle="modal"
+                onClick={()=>handleSelectUrunHizmet({})}
                 >Yeni Ürün Ekle</button>
                 <button type="button" className="btn btn-success mb-2 mt-3">Excelden Yükleme</button>
             </div>
@@ -88,7 +89,7 @@ export default function Urunler() {
                 </table>
             </div>
             {/**Modallar */}
-            <UrunModal urunHizmet={selectedUrunHizmet} setSelectedUrunHizmet={setSelectedUrunHizmet} />
+            <UrunModal selectedUrunHizmet={selectedUrunHizmet} setSelectedUrunHizmet={setSelectedUrunHizmet} />
         </div>
     )
 }

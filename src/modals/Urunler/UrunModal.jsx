@@ -4,17 +4,21 @@ import { ParaBirimi } from "../../contains/ParaBirimleri";
 import MusteriTedarikciService from "../../services/musteriTedarikciService";
 import { toast } from 'react-toastify'
 import EMobilStokService from "../../services/emobilStokService";
+import UrunService from "../../services/urunService";
+import EMobilCommonService from "../../services/emobilCommonService";
 
 
-export default function UrunModal({ urunHizmet, setUrunHizmet }) {
+export default function UrunModal({ selectedUrunHizmet, setSelectedUrunHizmet }) {
     const [tempUrunHizmet, setTempUrunHizmet] = useState({})
     const [urunHizmetTanitimi, setUrunHizmetTanitimi] = useState(true)
     const [fiyatlandırma, setFiyatlandırma] = useState(false)
     const [diger, setDiger] = useState(false)
     const [urunBirimiListesi, setUrunBirimiListesi] = useState([])
     const [urunTipiListesi, setUrunTipiListesi] = useState([])
+    const [kdvOraniListesi, setKdvOraniListesi] = useState([])
+
     useEffect(() => {
-        setTempUrunHizmet(urunHizmet)
+        setTempUrunHizmet(selectedUrunHizmet)
         const emobilStokService = new EMobilStokService()
         emobilStokService.urunBirimiListesi().then((result) => {
             setUrunBirimiListesi(result.data.eMobilUrunBirimiDtoList)
@@ -22,7 +26,17 @@ export default function UrunModal({ urunHizmet, setUrunHizmet }) {
         emobilStokService.urunTipiListesi().then((result) => {
             setUrunTipiListesi(result.data.eMobilUrunTipiDtoList)
         })
-    }, [urunHizmet])
+
+        const emobilCommonService = new EMobilCommonService()
+        emobilCommonService.kdvOraniListesi().then((result)=>{
+            setKdvOraniListesi(result.data.eMobilKdvOraniDtoList)
+        })
+    }, [selectedUrunHizmet])
+
+    useEffect(() => {
+        console.log("urunhizmeti",tempUrunHizmet)
+
+    }, [tempUrunHizmet])
 
 
     const handleUrunHızmetTanitimi = () => {
@@ -46,6 +60,21 @@ export default function UrunModal({ urunHizmet, setUrunHizmet }) {
     }
 
     const handleKayit = () => {
+        const urunService = new UrunService()
+        console.log(tempUrunHizmet)
+
+        urunService.urunKayit(tempUrunHizmet).then((result) => {
+            if (result.data.geriBildirimDto.kodu != 0) {
+                toast.error(result.data.geriBildirimDto.aciklama)
+
+            } else {
+                setSelectedUrunHizmet({})
+                toast.success("Kayıt Başarılı")
+            }
+        })
+    }
+
+    const handleSil =()=>{
 
     }
 
@@ -106,12 +135,14 @@ export default function UrunModal({ urunHizmet, setUrunHizmet }) {
                             <div className=" d-flex align-items-center justify-content-between my-2">
                                 <label className="col-4">Ürün Tipi</label>
 
-                                <select className="form-select" value={tempUrunHizmet.urunTipiAdi} onChange={(e) => {
-                                    handleSetUrunHizmet("urunTipiAdi", e.target.value.Adi);
-                                    handleSetUrunHizmet("tipi", e.target.value.Id);
+                                <select className="form-select" onChange={(e) => {
+                                    const selectedOption = JSON.parse(e.target.value)
+                                    handleSetUrunHizmet("urunTipiAdi", selectedOption.Adi);
+                                    handleSetUrunHizmet("tipi", selectedOption.Id);
+                                    console.log(selectedOption)
                                 }}>
                                     {urunTipiListesi.map((urunTipi) => (
-                                        <option key={urunTipi.Id} >{urunTipi.Adi}</option>
+                                        <option key={urunTipi.Id} value={JSON.stringify(urunTipi)}>{urunTipi.Adi}</option>
                                     ))}
                                 </select>
 
@@ -120,11 +151,14 @@ export default function UrunModal({ urunHizmet, setUrunHizmet }) {
                             <div className=" d-flex align-items-center justify-content-between my-2">
                                 <label className="col-4">Birimi</label>
                                 <select className="form-select" value={tempUrunHizmet.birimAdi} onChange={(e) => {
-                                    handleSetUrunHizmet("birimAdi", e.target.value.Adi);
-                                    handleSetUrunHizmet("birimId", e.target.value.Id);
+                                    const selectedOption = JSON.parse(e.target.value)
+                                    handleSetUrunHizmet("birimAdi", selectedOption.Adi);
+                                    handleSetUrunHizmet("birimId", selectedOption.Id);
+                                    console.log(selectedOption)
+
                                 }}>
                                     {urunBirimiListesi.map((urunBirimi) => (
-                                        <option key={urunBirimi.Id} >{urunBirimi.Adi}</option>
+                                        <option key={urunBirimi.Id} value={JSON.stringify(urunBirimi)} >{urunBirimi.Adi}</option>
                                     ))}
                                 </select>
 
@@ -169,13 +203,18 @@ export default function UrunModal({ urunHizmet, setUrunHizmet }) {
                             </div>
                             <div className=" d-flex align-items-center justify-content-between my-2">
                                 <label className="col-4">Satış Kdv Oranı</label>
-                                <input
-                                    class="form-control mx-2"
-                                    id="inputSatisKdvOrani"
-                                    placeholder="0"
-                                    value={tempUrunHizmet.satisKdvOrani}
-                                    onChange={(e) => handleSetUrunHizmet("satisKdvOrani", e.target.value)}
-                                ></input>
+
+<select className="form-select mx-2" value={tempUrunHizmet.satisKdvOrani} onChange={(e) => {
+                                    const selectedOption = JSON.parse(e.target.value)
+                                    handleSetUrunHizmet("satisKdvOrani", selectedOption.orani);
+                                    handleSetUrunHizmet("satisKdvId", selectedOption.id);
+                                    console.log(selectedOption)
+
+                                }}>
+                                    {kdvOraniListesi.map((kdvOrani) => (
+                                        <option key={kdvOrani.id} value={JSON.stringify(kdvOrani)} >{kdvOrani.orani} {kdvOrani.aciklama!=""?`- ${kdvOrani.aciklama}`:null}</option>
+                                    ))}
+                                </select>
 
                             </div>
 
@@ -188,7 +227,7 @@ export default function UrunModal({ urunHizmet, setUrunHizmet }) {
                                     value={tempUrunHizmet.alisFiyati}
                                     onChange={(e) => handleSetUrunHizmet("alisFiyati", e.target.value)}
                                 ></input>
-                                <select className="form-select mx-2" value={tempUrunHizmet.alisParaBirimi} onChange={(e) => handleSetUrunHizmet("satisParaBirimi", e.target.value)}>
+                                <select className="form-select mx-2" value={tempUrunHizmet.alisParaBirimi} onChange={(e) => handleSetUrunHizmet("alisParaBirimi", e.target.value)}>
                                     {
                                         ParaBirimi.map((birim) => (
                                             <option>
@@ -202,13 +241,17 @@ export default function UrunModal({ urunHizmet, setUrunHizmet }) {
 
                             <div className=" d-flex align-items-center justify-content-between my-2">
                                 <label className="col-4">Alış Kdv Oranı</label>
-                                <input
-                                    class="form-control mx-2"
-                                    id="inputAlisKdvOrani"
-                                    placeholder="0"
-                                    value={tempUrunHizmet.alisKdvOrani}
-                                    onChange={(e) => handleSetUrunHizmet("alisKdvOrani", e.target.value)}
-                                ></input>
+                                <select className="form-select mx-2" value={tempUrunHizmet.satisKdvOrani} onChange={(e) => {
+                                    const selectedOption = JSON.parse(e.target.value)
+                                    handleSetUrunHizmet("alisKdvOrani", selectedOption.orani);
+                                    handleSetUrunHizmet("alisKdvId", selectedOption.id);
+                                    console.log(selectedOption)
+
+                                }}>
+                                    {kdvOraniListesi.map((kdvOrani) => (
+                                        <option key={kdvOrani.id} value={JSON.stringify(kdvOrani)} >{kdvOrani.orani} {kdvOrani.aciklama!=""?`- ${kdvOrani.aciklama}`:null}</option>
+                                    ))}
+                                </select>
 
                             </div>
 
@@ -228,29 +271,95 @@ export default function UrunModal({ urunHizmet, setUrunHizmet }) {
                     }
 
 
-                    {/*
+                    {
                         diger ? <div className="modal-body flex-column">
 
                             <div className=" d-flex align-items-center justify-content-between my-2">
-                                <label className="col-4">Notlar</label>
-                                <textarea
-                                    class="form-control"
-                                    id="inputNotlar"
-                                    aria-describedby="notlar"
-                                    placeholder="Notlar"
-                                    rows={2}
-                                    value={tempMusteriTedarikci.notlar}
-                                    onChange={(e) => handleSetMusteriTedarikci("notlar",e.target.value)}
-                                ></textarea>
+                                <label className="col-4">Ürün Marka</label>
+                                <select className="form-select mx-2" value={tempUrunHizmet.etiketMarkaAdi} onChange={(e) => handleSetUrunHizmet("etiketMarkaAdi", e.target.value)}>
+                                    <option>
+                                        string
+                                    </option>
+                                </select>
+
 
                             </div>
 
+                            <div className=" d-flex align-items-center justify-content-between my-2">
+                                <label className="col-4">Ürün Kategori</label>
+                                <select className="form-select mx-2" value={tempUrunHizmet.etiketKategoriAdi} onChange={(e) => handleSetUrunHizmet("etiketKategoriAdi", e.target.value)}>
 
-                        </div> : null*/
+                                </select>
+
+
+                            </div>
+
+                            <div className=" d-flex align-items-center justify-content-between my-2">
+                                <label className="col-4">Ürün Raf Adı</label>
+                                <select className="form-select mx-2" value={tempUrunHizmet.etiketRafAdi} onChange={(e) => handleSetUrunHizmet("etiketRafAdi", e.target.value)}>
+
+                                </select>
+
+                            </div>
+
+                            <div className=" d-flex align-items-center justify-content-between my-2">
+                                <label className="col-4">Ürün Etiketi 1</label>
+                                <select className="form-select mx-2" value={tempUrunHizmet.etiket1Adi} onChange={(e) => handleSetUrunHizmet("etiket1Adi", e.target.value)}>
+
+                                </select>
+
+                            </div>
+
+                            <div className=" d-flex align-items-center justify-content-between my-2">
+                                <label className="col-4">Müşteri Etiketi 2</label>
+                                <select className="form-control mx-2" value={tempUrunHizmet.etiket2Adi} onChange={(e) => handleSetUrunHizmet("etiket2Adi", e.target.value)}>
+
+                                </select>
+
+                            </div>
+
+                            <div className=" d-flex align-items-center justify-content-between my-2">
+                                <label className="col-4">Ürün Kodu</label>
+                                <input className="form-control mx-2" value={tempUrunHizmet.urunKodu} onChange={(e) => handleSetUrunHizmet("urunKodu", e.target.value)}>
+                                </input>
+                            </div>
+
+                            <div className=" d-flex align-items-center justify-content-between my-2">
+                                <label className="col-4">Ürün Kodu</label>
+                                <input className="form-control mx-2" value={tempUrunHizmet.urunKodu} onChange={(e) => handleSetUrunHizmet("urunKodu", e.target.value)}>
+                                </input>
+                            </div>
+
+                            <div className=" d-flex align-items-center justify-content-between my-2">
+                                <label className="col-4">Fatura Ürün Adı</label>
+                                <input className="form-control mx-2" value={tempUrunHizmet.faturaUrunAdi} onChange={(e) => handleSetUrunHizmet("faturaUrunAdi", e.target.value)}>
+                                </input>
+                            </div>
+
+                            <div className=" d-flex align-items-center justify-content-between my-2">
+                                <label className="col-4">Açıklama</label>
+                                <textarea className="form-control mx-2" value={tempUrunHizmet.aciklama} onChange={(e) => handleSetUrunHizmet("aciklama", e.target.value)}>
+                                </textarea>
+                            </div>
+                            <div className=" d-flex align-items-center justify-content-between my-2">
+                                <label className="col-4">Barkodu</label>
+                                <input className="form-control mx-2" placeholder="Barkod" value={tempUrunHizmet.barkodu} onChange={(e) => handleSetUrunHizmet("barkodu", e.target.value)}>
+                                </input>
+                            </div>
+                            <div className=" d-flex align-items-center justify-content-between my-2">
+                                <label className="col-4">Kritik Seviye</label>
+                                <input className="form-control mx-2" placeholder="0" value={tempUrunHizmet.kritikStokMiktari} onChange={(e) => handleSetUrunHizmet("kritikStokMiktari", e.target.value)}>
+                                </input>
+                            </div>
+
+
+                        </div> : null
                     }
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success" onClick={handleKayit}>Kayıt</button>
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal"
+                            aria-label="Close"onClick={handleKayit}>Kayıt</button>
+                    {selectedUrunHizmet.id?<button type="button" class="btn btn-danger" onClick={handleSil}>Sil</button>:null}
                     </div>
                 </div>
             </div>

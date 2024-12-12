@@ -5,9 +5,9 @@ import LocalStorageService from "./localStorageService";
 
 
 
-export default class UrunService {
+export default class EMobilCommonService {
 
-    getUrunler() {
+    paraBirimiListesi() {
         const localStorageService = new LocalStorageService()
 
         const token = localStorageService.getItemWithTime("token")
@@ -16,7 +16,7 @@ export default class UrunService {
             return Promise.reject("Token bulunamadı!");
         }
 
-        return axios.post("https://apitest.kibrishesap.com/api/Urun/UrunListesi", {},
+        return axios.post("https://apitest.kibrishesap.com/api/EMobilStok/UrunTipiListesi", {},
             {
                 headers: {
                     'Authorization': `Bearer ${token}`, // Bearer Token başlığı
@@ -26,7 +26,7 @@ export default class UrunService {
         );
     }
 
-    urunKayit(urunDto) {
+    kdvOraniListesi() {
         const localStorageService = new LocalStorageService()
 
         const token = localStorageService.getItemWithTime("token")
@@ -35,7 +35,7 @@ export default class UrunService {
             return Promise.reject("Token bulunamadı!");
         }
 
-        return axios.post("https://apitest.kibrishesap.com/api/Urun/UrunKayit", JSON.stringify({urunDto}),
+        return axios.post("https://apitest.kibrishesap.com/api/EMobilCommon/KdvOraniListesi", {},
             {
                 headers: {
                     'Authorization': `Bearer ${token}`, // Bearer Token başlığı
@@ -44,28 +44,4 @@ export default class UrunService {
             }
         );
     }
-
-    urunSil(urunId) {
-        const localStorageService = new LocalStorageService()
-
-        const token = localStorageService.getItemWithTime("token")
-        if (!token) {
-            console.error("Token bulunamadı!");
-            return Promise.reject("Token bulunamadı!");
-        }
-
-        return axios.post("https://apitest.kibrishesap.com/api/Urun/UrunSil", {urunId},
-            {
-                headers: {
-                    'Authorization': `Bearer ${token}`, // Bearer Token başlığı
-                    'Content-Type': 'application/json'  // Doğru içerik türünü belirt
-                }
-            }
-        );
-    }
-
 }
-
-
-
-
