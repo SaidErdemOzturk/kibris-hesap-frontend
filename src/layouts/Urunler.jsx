@@ -4,6 +4,7 @@ import UrunService from '../services/urunService'
 import { toast } from 'react-toastify'
 import UrunModal from '../modals/Urunler/UrunModal'
 import BrushIcon from '@mui/icons-material/Brush';
+import { Switch } from '@mui/material'
 
 
 export default function Urunler() {
@@ -82,8 +83,8 @@ export default function Urunler() {
                                     <td>{urun.alisIskonto}</td>
                                     <td>{urun.urunKodu}</td>
                                     <td>{urun.barkodu}</td>
-                                    <td>{urun.ETicaret}</td>
-                                    <td>{urun.pasif}</td>
+                                    <td><input className="form-check-input" type="checkbox" checked={urun.eTicaret === true} disabled id="flexCheckDefault"/></td>
+                                    <td><Switch checked={urun.pasif} disabled/></td>
                                 </tr>
                             ))
                         }
