@@ -21,7 +21,7 @@ export default class MenuService {
 
     yeniUyeOlustur(isim, ePosta, cepTelefonu, sifre, sifreTekrar) {
         let siteWebYeniUyeUrl = "localhost:3000/yeniUye/"
-        return axios.post("https://apitest.kibrishesap.com/api/Menu/YeniUyeOlustur", JSON.stringify({ isim, ePosta, cepTelefonu, sifre, sifreTekrar, siteWebYeniUyeUrl })
+        return axios.post("https://apitest.kibrishesap.com/api/Menu/YeniUyeOlustur", { isim, ePosta, cepTelefonu, sifre, sifreTekrar, siteWebYeniUyeUrl }
         );
     }
 
